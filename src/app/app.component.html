@@ -1,0 +1,78 @@
+<ion-split-pane contentId="content" when="lg">
+  <ion-menu contentId="content" menuId="main" [disabled]="true">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Controle</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="goPage('/calendar')">
+            <ion-icon slot="icon-only" src="assets/icons/calendar.svg"></ion-icon>
+          </ion-button>
+          <ion-button (click)="goPage('/')">
+            <ion-icon slot="icon-only" src="assets/icons/home.svg"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="sidebar">
+      <!-- <ion-img style="width: 20%; margin: auto;" src="assets/imgs/logo.png"></ion-img> -->
+      <ion-menu-toggle color="transparent" auto-hide="false">
+        <ion-item color="transparent" lines="none" routerLink="/account">
+          <ion-avatar slot="start">
+            <img [src]="(model | async)?.photoURL || 'assets/imgs/noavatar.png'" />
+          </ion-avatar>
+          <ion-label>
+            <ion-text color="primary">
+              <h2>{{ (model | async)?.displayName }}</h2>
+            </ion-text>
+            <p>{{ (model | async)?.email }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <div *ngFor="let page of pages; let i = index">
+        <ion-item
+          lines="full"
+          style="cursor: pointer;"
+          color="medium"
+          (click)="toggleGroup(i)"
+          [ngClass]="{ active: isGroupShown(i) }"
+        >
+          <ion-label>
+            <h2>{{ page.title }}</h2>
+          </ion-label>
+          <ion-icon
+            slot="end"
+            [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'"
+          ></ion-icon>
+        </ion-item>
+        <ion-menu-toggle
+          auto-hide="false"
+          *ngIf="isGroupShown(i) && page.pages | async as subpages"
+        >
+          <ion-item
+            color="transparent"
+            lines="none"
+            *ngFor="let p of subpages; let l = last"
+            [hidden]="p.hidden"
+            [routerDirection]="'root'"
+            [routerLink]="[p.url]"
+            [class.active-item]="selectedPath === p.url"
+          >
+            <ion-icon size="large" slot="start" src="assets/icons/{{ p.icon }}.svg"></ion-icon>
+            <ion-label>
+              <h2>{{ p.title }}</h2>
+            </ion-label>
+            <ion-badge
+              slot="end"
+              [color]="selectedPath === p.url ? 'dark' : 'light'"
+              *ngIf="p.badge"
+            >
+              {{ p.badge }}
+            </ion-badge>
+          </ion-item>
+        </ion-menu-toggle>
+      </div>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="content"></ion-router-outlet>
+</ion-split-pane>

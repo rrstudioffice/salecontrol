@@ -1,0 +1,81 @@
+// App Styles
+// ----------------------------------------------------------------------------
+// Put style rules here that you want to apply to the entire application. These
+// styles are for the entire app and not just one component. Additionally, this
+// file can hold Sass mixins, functions, and placeholder classes to be imported
+// and used throughout the application.
+// IOS
+.ios {
+  ion-card {
+    --padding: 0;
+  }
+  ion-header {
+    ion-icon,
+    ion-back-button,
+    ion-menu-button {
+      color: white;
+    }
+  }
+  ion-segment {
+    ion-segment-button {
+      border-bottom: 0.1em solid var(--ion-color-dark);
+      --background-checked: var(--ion-color-dark);
+      --color-checked: white;
+      --color: var(--ion-color-dark);
+      --padding-top: 5px;
+      --padding-bottom: 5px;
+    }
+    --border-color: white;
+  }
+  ion-toast {
+    --background: rgb(27, 27, 27); // Background of the toast
+    --border-color: white; // Border color of the toast
+    --border-radius: 10px; //Border radius of the toast
+    --border-style: solid; // Border style of the toast
+    --border-width: 2px; // Border width of the toast
+    --box-shadow: rgb(127, 127, 127); //Box shadow of the toast
+    --color: white; // Color of the toast text
+  }
+  ion-grid {
+    ion-card {
+      width: 100%;
+      margin: 0 !important;
+    }
+  }
+}
+.split-pane-ios.split-pane-visible > .split-pane-side,
+.split-pane-md.split-pane-visible > .split-pane-side {
+  max-width: 280px;
+  min-width: 280px;
+}
+
+.image-content {
+  --background: rgba(255, 255, 255, 0.1) !important;
+  background-image: url('../assets/imgs/bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.image-logo {
+  height: 35vh;
+  width: auto;
+  margin: 20px auto;
+  display: block;
+}
+
+ion-segment-button {
+  border-bottom: 0.1em solid var(--ion-color-dark);
+  --color-checked: var(--ion-color-dark);
+}
+
+ion-toolbar {
+  --background: var(--ion-color-dark);
+  --color: var(--ion-color-light);
+}
+
+ion-content {
+  --background: rgb(227, 227, 227);
+}

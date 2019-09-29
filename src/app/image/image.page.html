@@ -1,0 +1,86 @@
+<ion-content>
+  <ion-progress-bar [value]="currentUpload | number"></ion-progress-bar>
+  <ion-fab vertical="top" horizontal="start" slot="fixed">
+    <ion-fab-button size="small" (click)="close()">
+      <ion-icon name="close-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button size="small" (click)="save()" [disabled]="!croppedImage">
+      <ion-icon name="checkmark-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <!-- UPLOAD IMAGE -->
+  <div text-center *ngIf="currentUpload">
+    <h3>Salvando</h3>
+    <ion-spinner name="dots"></ion-spinner>
+  </div>
+  <!-- IMAGEM -->
+  <ion-grid no-padding *ngIf="currentUpload == 0">
+    <ion-row justify-content-center>
+      <ion-col size="10" size-offset="1" size-xs="12">
+        <ion-grid no-padding>
+          <ion-row justify-content-center>
+            <ion-col size-xl="4" size-lg="4" size-md="4" size-sm="6" size-xs="12">
+              <!-- CAIDA DA IMAGEM ATUAL -->
+              <ion-card>
+                <ion-card-header>
+                  <ion-card-subtitle>Alterar Imagem</ion-card-subtitle>
+                </ion-card-header>
+                <img [src]="croppedImage || modelImage || imageDefault" />
+                <ion-item>
+                  <input type="file" (change)="detectFiles($event)" />
+                </ion-item>
+              </ion-card>
+            </ion-col>
+            <!-- EDIÇÃO DA IMAGEM -->
+            <ion-col
+              *ngIf="selectedFile"
+              size-xl="8"
+              size-lg="8"
+              size-md="8"
+              size-sm="6"
+              size-xs="12"
+            >
+              <image-cropper
+                #cropper
+                [imageChangedEvent]="imageChangedEvent"
+                [maintainAspectRatio]="true"
+                [aspectRatio]="1 / 1"
+                [resizeToWidth]="354"
+                format="png"
+                (imageCropped)="imageCropped($event)"
+              >
+              </image-cropper>
+
+              <ion-grid *ngIf="croppedImage" text-center>
+                <ion-row>
+                  <ion-col>
+                    <ion-button color="light" (click)="rotateLeft()">
+                      <ion-icon slot="icon-only" src="assets/icons/rotateleft.svg"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                  <ion-col>
+                    <ion-button color="light" (click)="rotateRight()">
+                      <ion-icon slot="icon-only" src="assets/icons/rotateright.svg"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                  <ion-col>
+                    <ion-button color="light" (click)="flipVertical()">
+                      <ion-icon slot="icon-only" src="assets/icons/flipvertical.svg"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                  <ion-col>
+                    <ion-button color="light" (click)="flipHorizontal()">
+                      <ion-icon slot="icon-only" src="assets/icons/fliphorizontal.svg"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

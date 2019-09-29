@@ -1,0 +1,117 @@
+<ion-content class="image-content">
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col size="12" size-sm="6" offset-sm="3" size-md="6" offset-md="3">
+        <!-- <img class="image-logo" src="assets/site/logo.png"> -->
+        <h3 text-center>Controle</h3>
+        <ion-card no-padding>
+          <ion-card-header text-center>
+            <ion-card-title style="color: black;">Acessar minha conta</ion-card-title>
+          </ion-card-header>
+          <form [formGroup]="form" (ngSubmit)="save(authProviders.Email)">
+            <ng-container *ngIf="!configs.isSignIn">
+              <ion-item>
+                <ion-icon name="person" slot="start"></ion-icon>
+                <ion-input
+                  type="text"
+                  placeholder="Nome"
+                  formControlName="firstname"
+                ></ion-input>
+                <ion-note color="danger" slot="end" *ngIf="firstname.dirty && firstname.getError('required')">
+                  Obrigatório
+                </ion-note>
+              </ion-item>
+              <ion-item color="danger" slot="end" *ngIf="firstname.dirty && firstname.getError('minlenght')">
+                Mínimo de 6 caracteres
+              </ion-item>
+
+              <ion-item>
+                <ion-icon name="person" slot="start"></ion-icon>
+                <ion-input
+                  type="text"
+                  placeholder="sobrenome"
+                  formControlName="lastname"
+                ></ion-input>
+                <ion-note color="danger" slot="end" *ngIf="lastname.dirty && lastname.getError('required')">
+                  Obrigatório
+                </ion-note>
+              </ion-item>
+              <ion-item color="danger" slot="end" *ngIf="lastname.dirty && lastname.getError('minlenght')">
+                Mínimo de 6 caracteres
+              </ion-item>
+            </ng-container>
+
+            <ion-item>
+              <ion-icon name="mail" slot="start"></ion-icon>
+              <ion-input
+                inputmode="email"
+                type="email"
+                sutofocus="true"
+                placeholder="E-mail"
+                formControlName="email"
+              ></ion-input>
+              <ion-note color="danger" slot="end" *ngIf="email.dirty && email.getError('required')">
+                Obrigatório
+              </ion-note>
+            </ion-item>
+            <ion-item color="danger" slot="end" *ngIf="email.dirty && email.getError('email')">
+              Não é um E-mail válido
+            </ion-item>
+            <ion-item>
+              <ion-icon name="lock" slot="start"></ion-icon>
+              <ion-input type="password" placeholder="Senha" formControlName="password"></ion-input>
+              <ion-note color="danger" slot="end" *ngIf="email.dirty && email.getError('required')">
+                Obrigatório
+              </ion-note>
+            </ion-item>
+            <ion-item
+              color="danger"
+              slot="end"
+              *ngIf="password.dirty && password.getError('minlenght')"
+            >
+              Mínimo de 6 caracteres
+            </ion-item>
+            <ion-button size="small" expand="block" type="submit" [disabled]="!form.valid">
+              {{ configs.action }}
+            </ion-button>
+          </form>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" size-sm="6" offset-sm="3" size-md="6" offset-md="3">
+        <ion-button
+          color="light"
+          expand="block"
+          size="small"
+          routerLink="/auth/forgot"
+        >
+          Recuperar minha senha
+        </ion-button>
+        <ion-button
+          color="light"
+          expand="block"
+          size="small"
+          (click)="changeAuthAction()"
+        >
+          {{ configs.actionChange }}
+        </ion-button>
+      </ion-col>
+      <ion-col size="12" size-sm="6" offset-sm="3" size-md="6" offset-md="3">
+        <ion-button expand="block" size="small" (click)="save(authProviders.Facebook)">
+          <ion-icon name="logo-facebook" slot="start"></ion-icon>
+          Login com Facebook
+        </ion-button>
+      </ion-col>
+      <ion-col size="12" size-sm="6" offset-sm="3" size-md="6" offset-md="3">
+        <ion-button color="danger" expand="block" size="small" (click)="save(authProviders.Google)">
+          <ion-icon name="logo-google" slot="start"></ion-icon>
+          Login com Google
+        </ion-button>
+      </ion-col>
+      <ion-col size="12" size-sm="6" offset-sm="3" size-md="6" offset-md="3">
+        <!-- <p>* 1º mês grátis. Depois será cobrado um valor único de R$ 10,00 ( Dez reais ).</p> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

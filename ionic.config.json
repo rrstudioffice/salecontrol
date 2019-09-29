@@ -1,0 +1,7 @@
+{
+  "name": "ion4-default",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

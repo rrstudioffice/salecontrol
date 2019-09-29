@@ -1,0 +1,28 @@
+.default-container {
+  .scroll-content .scroll {
+    padding-left: 5px;
+    padding-right: 5px;
+    height: 100%;
+  }
+  .empty-results {
+    text-align: center;
+    ion-spinner {
+      color: white;
+    }
+    .icon {
+      -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.5));
+      filter: drop-shadow(7px 7px 7px rgba(0, 0, 0, 0.5));
+      padding: 10px;
+      font-size: 10em;
+      color: white;
+    }
+    image {
+      color: white;
+    }
+    .no-default {
+      color: gray;
+      // text-shadow: 0.05em 0.05em 0.05em black;
+      font-size: 26px;
+    }
+  }
+}

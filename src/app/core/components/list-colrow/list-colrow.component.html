@@ -1,0 +1,66 @@
+<ion-item-sliding #sliding>
+  <ion-item-options side="start" *ngIf="plt.is('mobile')">
+    <ion-item-option
+      *ngIf="isDelete"
+      color="light"
+      (click)="$event.stopPropagation(); delete.emit(item); sliding.close()"
+    >
+      <ion-icon slot="icon-only" size="large" src="assets/icons/trash.svg"></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
+
+  <ion-item button lines="full" (click)="view.emit(item)">
+    <ng-content></ng-content>
+
+    <ion-buttons slot="end" *ngIf="!plt.is('mobile')">
+      <ion-button *ngIf="isMenu" size="small" (click)="$event.stopPropagation(); menu.emit(item)">
+        <ion-icon slot="icon-only" size="large" [src]="menuIcon"></ion-icon>
+      </ion-button>
+      <ion-button
+        *ngIf="isUpdate"
+        size="small"
+        (click)="$event.stopPropagation(); update.emit(item)"
+      >
+        <ion-icon slot="icon-only" size="large" src="assets/icons/edit.svg"></ion-icon>
+      </ion-button>
+      <ion-button
+        *ngIf="isUpload"
+        size="small"
+        (click)="$event.stopPropagation(); upload.emit(item)"
+      >
+        <ion-icon slot="icon-only" size="large" src="assets/icons/album.svg"></ion-icon>
+      </ion-button>
+      <ion-button
+        *ngIf="isDelete"
+        size="small"
+        (click)="$event.stopPropagation(); delete.emit(item)"
+      >
+        <ion-icon slot="icon-only" size="large" src="assets/icons/trash.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
+
+  <ion-item-options side="end" *ngIf="plt.is('mobile')">
+    <ion-item-option
+      *ngIf="isUpload"
+      color="light"
+      (click)="$event.stopPropagation(); upload.emit(item); sliding.close()"
+    >
+      <ion-icon slot="icon-only" src="assets/icons/album.svg"></ion-icon>
+    </ion-item-option>
+    <ion-item-option
+      *ngIf="isMenu"
+      color="light"
+      (click)="$event.stopPropagation(); menu.emit(item); sliding.close()"
+    >
+      <ion-icon slot="icon-only" [src]="menuIcon"></ion-icon>
+    </ion-item-option>
+    <ion-item-option
+      *ngIf="isUpdate"
+      color="light"
+      (click)="$event.stopPropagation(); update.emit(item); sliding.close()"
+    >
+      <ion-icon slot="icon-only" src="assets/icons/create.svg"></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>

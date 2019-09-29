@@ -1,0 +1,11 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ cardTitle }}</ion-card-title>
+  </ion-card-header>
+  <ion-item>
+    <ion-label>
+      <h2>Total {{ confirmed | currency: 'BRL' }}</h2>
+      <h2>Pendente {{ pending | currency: 'BRL' }}</h2>
+    </ion-label>
+  </ion-item>
+</ion-card>

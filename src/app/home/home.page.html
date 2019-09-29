@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ date }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="model$ | async as model">
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col no-padding>
+          <app-confirmed-pending
+            cardTitle="Despesas"
+            [confirmed]="model.payConfirmed"
+            [pending]="model.payPending"
+          >
+          </app-confirmed-pending>
+        </ion-col>
+        <ion-col no-padding size="6">
+          <app-confirmed-pending
+            cardTitle="Receitas"
+            [confirmed]="model.receiverConfirmed"
+            [pending]="model.receiverPending"
+          >
+          </app-confirmed-pending>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col no-padding size="6">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Despesas</ion-card-title>
+            </ion-card-header>
+            <app-chart-bar
+              [chartLabel]="['Despesas Confirmadas e Pendentes']"
+              [chartData]="[
+                { data: [model.payConfirmed], label: 'Confirmado' },
+                { data: [model.payPending], label: 'Pendente' }
+              ]"
+            >
+            </app-chart-bar>
+          </ion-card>
+        </ion-col>
+        <ion-col no-padding size="6">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Receitas</ion-card-title>
+            </ion-card-header>
+            <app-chart-bar
+              [chartLabel]="['Receitas Confirmados e Pendentes']"
+              [chartData]="[
+                { data: [model.receiverConfirmed], label: 'Confirmado' },
+                { data: [model.receiverPending], label: 'Pendente' }
+              ]"
+            >
+            </app-chart-bar>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- GRAFICO -->
+  </ng-container>
+
+  <ng-container *ngIf="modelYear$ | async as modelYear">
+    <app-year-chart [modelYear]="modelYear"></app-year-chart>
+  </ng-container>
+</ion-content>

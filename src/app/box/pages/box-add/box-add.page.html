@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ pageTitle }} {{ pageSubtitle }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid no-padding>
+    <ion-row justify-content-center align-items-center>
+      <ion-col size-xl="6" size-lg="8" size-md="8" size-sm="10" size-xs="12">
+        <ion-card no-padding [ngStyle]="{ 'border-left': '5px solid ' + style }">
+          <form [formGroup]="form" (ngSubmit)="save()">
+            <ion-item *ngIf="types$ | async as types">
+              <ion-label position="floating">Tipo</ion-label>
+              <ion-select placeholder="Selecione o Tipo" formControlName="typeId">
+                <ion-select-option [value]="item.id" *ngFor="let item of types">{{
+                  item.name
+                }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Descrição</ion-label>
+              <ion-input type="text" formControlName="description"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">Valor</ion-label>
+              <ion-input type="number" formControlName="price"></ion-input>
+            </ion-item>
+
+            <ion-item *ngIf="methods$ | async as methods">
+              <ion-label position="floating">Método de Pagamento</ion-label>
+              <ion-select placeholder="Selecione o Método" formControlName="methodId">
+                <ion-select-option [value]="item.id" *ngFor="let item of methods">{{
+                  item.name
+                }}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Data</ion-label>
+              <ion-input type="date" formControlName="datetime"></ion-input>
+            </ion-item>
+
+            <ion-item lines="full">
+              <ion-label *ngIf="form.value.confirmed">Confirmado</ion-label>
+              <ion-label *ngIf="!form.value.confirmed">Pendente</ion-label>
+              <ion-toggle formControlName="confirmed"></ion-toggle>
+            </ion-item>
+            <ion-button size="small" expand="block" type="submit" [disabled]="!form.valid">
+              Salvar
+            </ion-button>
+          </form>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

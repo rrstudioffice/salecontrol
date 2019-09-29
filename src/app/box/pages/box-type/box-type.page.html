@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Tipos</ion-title>
+    <ion-buttons slot="end" [routerLink]="['/box/type/add']">
+      <ion-button>
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [(ngModel)]="category" value="receive" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="receive">
+      <ion-label>Arrecadação</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="pay">
+      <ion-label>Pagamentos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <div *ngIf="items$ | async as items">
+    <ng-container *ngIf="items.length > 0; else noItems">
+      <app-list-colrow
+        *ngFor="let item of items"
+        [item]="item"
+        [isUpload]="false"
+        [isMenu]="false"
+        (view)="view($event)"
+        (update)="update($event)"
+        (delete)="delete($event)"
+      >
+        <ion-label data-value>
+          <h2>{{ item.name }}</h2>
+          <small>Criado por: {{ item.user.displayName }}</small>
+        </ion-label>
+      </app-list-colrow>
+    </ng-container>
+    <ng-template #noItems>
+      <app-list-null
+        title="Nenhuma Categoria registrada até o momento"
+        icon="assets/icons/category.svg"
+      ></app-list-null>
+    </ng-template>
+  </div>
+</ion-content>

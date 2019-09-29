@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Minha Conta</ion-title>
+    <ion-buttons slot="end" (click)="open($event)">
+      <ion-button>
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid no-padding *ngIf="model$ | async as model">
+    <ng-container *ngIf="model; else loading">
+      <ion-row justify-content-center>
+        <!-- PERFIL -->
+        <ion-col size-xl="8" size-lg="8" size-md="8" size-sm="10" size-xs="12">
+          <ion-card>
+            <ion-card-header text-center>
+              <ion-card-title>{{ model.displayName }}</ion-card-title>
+            </ion-card-header>
+            <ion-item lines="full">
+              <ion-thumbnail slot="start">
+                <img [src]="model.photoURL || 'assets/imgs/noavatar.png'" />
+              </ion-thumbnail>
+              <ion-label text-wrap>
+                <ion-text>
+                  <h2>
+                    <small>{{ model.email }}</small>
+                  </h2>
+                  <small>Desde {{ model.createdAt | moment: 'MM/YYYY' }}</small>
+                </ion-text>
+              </ion-label>
+              <ion-icon name="camera" size="large" slot="end" (click)="upload(model)"></ion-icon>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ng-template #loading>
+        <ion-progress-bar type="indeterminate"></ion-progress-bar>
+        <div class="empty-results">
+          <h2 class="no-default">Configurando...</h2>
+          <ion-spinner name="dots"></ion-spinner>
+        </div>
+      </ng-template>
+    </ng-container>
+  </ion-grid>
+</ion-content>

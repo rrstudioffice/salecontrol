@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Notificações</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <app-list-null *ngIf="(items | async)?.length == 0"></app-list-null> -->
+  <ion-grid no-padding>
+    <ion-row justify-content-center align-items-center>
+      <ion-col
+        *ngFor="let item of items | async"
+        size-lg="6"
+        size-md="6"
+        size-sm="6"
+        size-xl="4"
+        size-xs="12"
+      >
+        <ion-card>
+          <ion-item lines="full">
+            <ion-thumbnail slot="start">
+              <img [src]="'assets/icons/bell.svg'" />
+            </ion-thumbnail>
+            <ion-buttons slot="end">
+              <ion-button size="small" color="danger" slot="end" (click)="remove(item.id)">
+                <ion-icon size="large" src="assets/icons/trash.svg"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+          <ion-item lines="none" color="light" [routerLink]="item.item.clickAction">
+            <ion-label text-wrap>
+              <ion-text>
+                <h2>{{ item.title }}</h2>
+                <p *ngIf="item.title === 'Novo Treinador'">
+                  Aceitar solicitação...
+                </p>
+              </ion-text>
+              <p>{{ item.body }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

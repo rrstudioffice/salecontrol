@@ -1,0 +1,21 @@
+.sidebar {
+  --background: transparent;
+  --ion-color-base: transparent !important;
+  background-color: gray;
+  h2,
+  p {
+    color: white;
+  }
+
+  .active-item {
+    border-right: 5px solid var(--ion-color-dark);
+    ion-label,
+    h2 {
+      color: var(--ion-color-dark) !important;
+    }
+  }
+  ion-icon {
+    -webkit-filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.8));
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.8));
+  }
+}

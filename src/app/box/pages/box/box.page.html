@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ date }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="modelSearch = !modelSearch">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" *ngIf="modelSearch">
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col no-padding>
+          <ion-item color="light">
+            <ion-label position="floating">Mês</ion-label>
+            <ion-select
+              (ionChange)="search()"
+              placeholder="Selecione a mês"
+              formControlName="month"
+            >
+              <ion-select-option
+                [selected]="modelFilter.month === day.cod"
+                [value]="day.cod"
+                *ngFor="let day of days"
+              >
+                {{ day.label }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col no-padding>
+          <ion-item color="light">
+            <ion-label position="floating">Ano</ion-label>
+            <ion-select (ionChange)="search()" placeholder="Selecione o ano" formControlName="year">
+              <ion-select-option
+                [selected]="modelFilter.month === y"
+                [value]="y"
+                *ngFor="let y of years"
+              >
+                {{ y }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <!-- <ion-col no-padding size="auto">
+          <ion-button size="large" fill="clear" type="submit" [disabled]="!form.valid">
+            <ion-icon size="large" slot="icon-only" name="search"></ion-icon>
+          </ion-button>
+        </ion-col> -->
+      </ion-row>
+    </ion-grid>
+  </form>
+
+  <ion-segment [(ngModel)]="segmentBox" value="receive" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="all">
+      <ion-label>Todos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="receive">
+      <ion-label>Arrecadação</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="pay">
+      <ion-label>Pagamentos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="items$ | async as items">
+    <ng-container *ngIf="items.length > 0; else noItems">
+      <app-list-colrow
+        *ngFor="let item of items"
+        [item]="item"
+        [isUpload]="false"
+        [isMenu]="false"
+        (view)="view($event)"
+        (update)="update($event)"
+        (delete)="delete($event)"
+      >
+        <span slot="start">
+          {{ item.datetime | moment: 'DD' }}
+        </span>
+        <ion-label text-wrap>
+          {{ item.type.name }}
+          <p>{{ item.price | currency: 'BRL' }}</p>
+        </ion-label>
+      </app-list-colrow>
+    </ng-container>
+    <ng-template #noItems>
+      <app-list-null
+        title="Nenhuma Conta registrada até o momento"
+        icon="assets/icons/category.svg"
+      ></app-list-null>
+    </ng-template>
+  </div>
+</ion-content>

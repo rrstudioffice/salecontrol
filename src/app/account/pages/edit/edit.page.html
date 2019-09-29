@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/account"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar Conta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col size="12" size-sm="6" offset-sm="3" size-md="6" offset-md="3">
+        <ion-card>
+          <form [formGroup]="form">
+            <ion-item>
+              <ion-label position="floating">Nome</ion-label>
+              <ion-input type="text" formControlName="firstname"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Sobrenome</ion-label>
+              <ion-input type="text" formControlName="lastname"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Data de Nascimento</ion-label>
+              <ion-input type="date" formControlName="birthday"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Endereço</ion-label>
+              <ion-input type="text" formControlName="address"></ion-input>
+            </ion-item>
+
+            <ion-item lines="full">
+              <ion-icon slot="start" [name]="form.value.gender ? 'man' : 'woman'"> </ion-icon>
+              <ion-label *ngIf="form.value.gender">Masculino</ion-label>
+              <ion-label *ngIf="!form.value.gender">Feminino</ion-label>
+              <ion-toggle formControlName="gender"></ion-toggle>
+            </ion-item>
+
+            <ion-button size="small" expand="full" [disabled]="form.invalid" (click)="save()"
+              >Entrar</ion-button
+            >
+          </form>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
