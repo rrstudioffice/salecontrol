@@ -1,8 +1,8 @@
 # Sale Control
 
-Controle financeiro
+## Controle financeiro
 
-Contas a Pagar
-Contas a Receber
-Formas de Pagamento
-Categorias
+1. Contas a Pagar
+2. Contas a Receber
+3. Formas de Pagamento
+4. Categorias Personalizadas
