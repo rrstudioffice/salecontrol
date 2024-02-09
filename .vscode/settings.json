@@ -1,14 +1,14 @@
 {
   "workbench.iconTheme": "material-icon-theme",
-  "window.zoomLevel": 0.5,
+  "window.zoomLevel": 0,
   "window.titleBarStyle": "custom",
   "editor.autoIndent": "full",
   "editor.codeActionsOnSave": {
-    "source.organizeImports": false
+    "source.organizeImports": "never"
   },
   "editor.codeLens": false,
   "editor.cursorBlinking": "solid",
-  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorStyle": "line",
   "editor.fontSize": 14,
   "editor.fontFamily": "Dank Mono, Operator Mono, Fira Code, Inconsolata, Menlo",
